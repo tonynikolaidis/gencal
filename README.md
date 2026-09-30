@@ -1,4 +1,4 @@
-# Calendar
+# Gen-cal
 
 A printable monthly calendar built with Typst, with a large writing grid and small calendars for the previous, current, and next months. Weekdays, month lengths, leap years, and row counts are calculated automatically.
 
