@@ -1,9 +1,12 @@
+#import "events.typ": event
+
 // Monday is 0 and Sunday is 6, as in small-calendar.
 // Supply the previous month's length to show its trailing dates correctly.
 #let big-calendar(
   first-weekday,
   days-in-month,
   previous-month-days: 31,
+  events: (),
   width: 100%,
   height: 100%,
 ) = {
@@ -11,8 +14,13 @@
   let header-height = 16pt
   let week-height = (height - header-height) / week-count
   let weekdays = (
-    [Monday], [Tuesday], [Wednesday], [Thursday],
-    [Friday], [Saturday], [Sunday],
+    [Monday],
+    [Tuesday],
+    [Wednesday],
+    [Thursday],
+    [Friday],
+    [Saturday],
+    [Sunday],
   )
 
   block(width: width, breakable: false)[
@@ -42,12 +50,24 @@
         }
 
         table.cell(
-          inset: (4pt),
-          text(
-            size: 9pt,
-            weight: "bold",
-            fill: if in-month { black } else { rgb("#B5B5B5") },
-            str(label),
+          inset: 4pt,
+          grid(
+            row-gutter: 4pt,
+            text(
+              size: 9pt,
+              weight: "bold",
+              fill: if in-month { black } else { rgb("#B5B5B5") },
+              str(label),
+            ),
+            if in-month {
+              grid(
+                row-gutter: 2pt,
+                ..events
+                  .filter(item => int(item.date.split("-").last()) == date)
+                  .sorted(key: item => item.at("time", default: ""))
+                  .map(item => event(item.at("time", default: none), item.title)),
+              )
+            },
           ),
         )
       }),

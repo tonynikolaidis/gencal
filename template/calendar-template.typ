@@ -24,6 +24,7 @@
   (
     month: first.display("[month repr:long]"),
     year: str(first.year()),
+    date-prefix: first.display("[year]-[month]"),
     first-weekday: first.weekday() - 1,
     days-in-month: (next-first - duration(days: 1)).day(),
   )
@@ -47,13 +48,13 @@
   )
 }
 
-#let calendar(month, year) = {
+#let calendar(month, year, events: ()) = {
   let dates = calendar-data(month, year)
   let current = dates.current
 
   set page(
     paper: "a4",
-    margin: 0.5in,
+    margin: 10mm,
     flipped: true,
   )
 
@@ -71,8 +72,9 @@
     align: (left, right),
     grid.cell(colspan: 2, []),
     text(
-      size: 24pt,
+      size: 28pt,
       weight: "bold",
+      tracking: -0.03em,
       [#current.month #current.year],
     ),
     grid(
@@ -95,6 +97,7 @@
         current.first-weekday,
         current.days-in-month,
         previous-month-days: dates.previous.days-in-month,
+        events: events.filter(item => item.date.starts-with(current.date-prefix + "-")),
       ),
     ),
   )

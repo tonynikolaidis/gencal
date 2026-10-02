@@ -26,7 +26,7 @@
     #block(
       width: 100%,
       height: week-height,
-      radius: 100%,
+      radius: 2pt,
       clip: true,
       stroke: (stroke-width + black),
     )[
