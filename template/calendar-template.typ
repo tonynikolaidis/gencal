@@ -59,6 +59,7 @@
   )
 
   set text(
+    // font: "SF Pro",
     font: "Helvetica Neue",
     // size: 12pt,
     // weight: "bold",

@@ -1,6 +1,7 @@
 #let event-text(cont) = {
   text(
     size: 6pt,
+    tracking: 0.02em,
     weight: "regular",
     align(left, par(
       leading: 2pt,

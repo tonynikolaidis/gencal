@@ -29,6 +29,7 @@
       radius: 2pt,
       clip: true,
       stroke: (stroke-width + black),
+      fill: rgb("#CBCBCB")
     )[
       #table(
         columns: (1fr,) * 7,
@@ -41,7 +42,7 @@
           let in-month = date >= 1 and date <= days-in-month
 
           table.cell(
-            fill: if in-month and current { black } else { rgb("#CBCBCB") },
+            fill: if in-month and current { black },
           )[
             #if in-month {
               text(
